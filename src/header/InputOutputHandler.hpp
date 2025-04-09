@@ -9,12 +9,17 @@ class InputOutputHandler {
 private:
     string inputPath;
     string outputPath;
-
+    int method;
+    float threshold;
+    int minBlockSize;
 public:
     InputOutputHandler(int argc, char** argv);
 
     string getInputPath() const;
     string getOutputPath() const;
+    int getMethod() const;
+    float getThreshold() const;
+    int getMinBlockSize() const;
 };
 
 #endif
