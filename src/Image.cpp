@@ -10,6 +10,12 @@ Image::Image() {
     data = nullptr;
 }
 
+Image::Image(int w, int h) {
+    this->width = w;
+    this->height = h;
+    allocate(w, h);
+}
+
 Image::~Image() {
     deallocate();
 }

@@ -22,6 +22,7 @@ private:
 
 public:
     Image();
+    Image(int w, int h);
     ~Image();
 
     bool load(const string& path);
