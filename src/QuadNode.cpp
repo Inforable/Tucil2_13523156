@@ -173,7 +173,7 @@ void QuadNode::fill(Image& output) const {
 
 int QuadNode::getDepth() const {
     if (isLeaf) {
-        return 1;
+        return 0;
     }
     int maxDepth = 0;
     for (int i = 0; i < 4; i++) {
