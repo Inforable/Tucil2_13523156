@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <sstream>
+#include <filesystem>
 #include "header/InputHandler.hpp"
 #include "header/Image.hpp"
 #include "header/QuadTree.hpp"

@@ -13,7 +13,7 @@ private:
     float threshold;
     int minBlockSize;
 
-    bool validate();
+    bool checkValid();
 public:
     InputHandler();
 

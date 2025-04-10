@@ -1,14 +1,23 @@
 #include "header/InputHandler.hpp"
 #include <iostream>
 #include <sstream>
+#include <filesystem>
+namespace fs = std::filesystem;
 using namespace std;
 
 InputHandler::InputHandler() {
 }
 
-bool InputHandler::validate() {
-
+bool InputHandler::checkValid() {
     bool valid = true;
+    if (!fs::exists(inputPath)) {
+        cerr << "Path input tidak valid" << endl;
+        return false;
+    }
+    if (outputPath.empty() || !fs::path(outputPath).has_extension()) {
+        cout << "Path output tidak valid" << endl;
+        valid = false;
+    }
     if (method < 1 || method > 4) {
         cerr << "Metode tidak valid" << endl;
         valid = false;
@@ -36,22 +45,30 @@ void InputHandler::InputSingleLine() {
         getline(cin, line);
         stringstream ss(line);
         ss >> inputPath >> outputPath >> method >> threshold >> minBlockSize;
-        if (validate()) {
+        if (checkValid()) {
             break;
         } 
-        cout << "Input tidak valid. Silakan coba lagi." << endl;
+        cout << endl << "==========Silakan coba lagi==========" << endl;
     }
 }
 
 void InputHandler::InputOnebyOne() {
     while (true) {
-        cout << "Masukkan path gambar input: ";
-        getline(cin, inputPath);
+        while (true) {
+            cout << "Masukkan path gambar input: ";
+            getline(cin, inputPath);
+            if (fs::exists(inputPath)) break;
+            cout << "File input tidak valid" << endl;
+        }
 
-        cout << "Masukkan path gambar output: ";
-        getline(cin, outputPath);
+        while (true) {
+            cout << "Masukkan path gambar output: ";
+            getline(cin, outputPath);
+            if (!outputPath.empty() && fs::path(outputPath).has_extension()) break;
+            cout << "Path output tidak valid" << endl;
+        }
 
-        string line;
+        string input;
 
         while (true) {
             cout << "Pilihan Metode Pengukuran Error: " << endl;
@@ -60,24 +77,24 @@ void InputHandler::InputOnebyOne() {
             cout << "3. Max Pixel Difference" << endl;
             cout << "4. Entropy" << endl;
             cout << "Pilih metode error: ";
-            getline(cin, line);
-            stringstream ss(line);
+            getline(cin, input);
+            stringstream ss(input);
             if (ss >> method && method >= 1 && method <= 4) break;
             cout << "Metode tidak valid. Masukkan angka antara 1 sampai 4.\n";
         }
 
         while (true) {
             cout << "Masukkan threshold (>= 0): ";
-            getline(cin, line);
-            stringstream ss(line);
+            getline(cin, input);
+            stringstream ss(input);
             if (ss >> threshold && threshold >= 0) break;
             cout << "Threshold tidak valid. Masukkan angka >= 0.\n";
         }
 
         while (true) {
             cout << "Masukkan minimum block size (> 0): ";
-            getline(cin, line);
-            stringstream ss(line);
+            getline(cin, input);
+            stringstream ss(input);
             if (ss >> minBlockSize && minBlockSize > 0) break;
             cout << "Ukuran minimum blok tidak valid. Masukkan angka > 0.\n";
         }
