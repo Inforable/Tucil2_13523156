@@ -1,19 +1,25 @@
-// InputOutputHandler.hpp
-#ifndef INPUT_OUTPUT_HANDLER_H
-#define INPUT_OUTPUT_HANDLER_H
+// InputHandler.hpp
+#ifndef INPUT_HANDLER_H
+#define INPUT_HANDLER_H
 
 #include <string>
 using namespace std;
 
-class InputOutputHandler {
+class InputHandler {
 private:
     string inputPath;
     string outputPath;
     int method;
     float threshold;
     int minBlockSize;
+
+    bool validate();
 public:
-    InputOutputHandler(int argc, char** argv);
+    InputHandler();
+
+    void InputSingleLine();
+
+    void InputOnebyOne();
 
     string getInputPath() const;
     string getOutputPath() const;
@@ -23,4 +29,4 @@ public:
 };
 
 #endif
-// end of InputOutputHandler.hpp
+// end of InputHandler.hpp

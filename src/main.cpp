@@ -1,31 +1,39 @@
 #include <iostream>
 #include <chrono>
-#include "header/InputOutputHandler.hpp"
+#include <sstream>
+#include "header/InputHandler.hpp"
 #include "header/Image.hpp"
 #include "header/QuadTree.hpp"
 using namespace std;
 
 int main(int argc, char** argv) {
+    InputHandler io;
+
     try {
-        InputOutputHandler io(argc, argv);
+        int choice;
+        while (true) {
+            cout << "Pilih Cara untuk Input: " << endl;
+            cout << "1. Input dalam Satu Baris Sekaligus dengan format (<input path> <output path> <Metode> <threshold> <minBlockSize>)" << endl;
+            cout << "2. Input Satu per Satu" << endl;
+            cout << "Pilihan: ";
 
-        int method = io.getMethod();
-        if (method < 1 || method > 4) {
-            cerr << "Metode Tidak Valid" << endl;
-            return 1;
-        }
+            string line;
+            getline(cin, line);
+            stringstream ss(line);
+            if (!(ss >> choice)) {
+                cout << "Input harus berupa angka!\n";
+                continue;
+            }
 
-        float threshold = io.getThreshold();
-        int minBlockSize = io.getMinBlockSize();
-
-        if (threshold < 0) {
-            cerr << "Threshold Tidak Valid" << endl;
-            return 1;
-        }
-
-        if (minBlockSize <= 0) {
-            cerr << "Ukuran Blok Minimum Tidak Valid" << endl;
-            return 1;
+            if (choice == 1) {
+                io.InputSingleLine();
+                break;
+            } else if (choice == 2) {
+                io.InputOnebyOne();
+                break;
+            } else {
+                cerr << "Pilihan tidak valid." << endl;
+            }
         }
 
         Image img;
@@ -39,7 +47,7 @@ int main(int argc, char** argv) {
         auto start = chrono::high_resolution_clock::now();
 
         cout << "Memulai kompresi..." << endl; // debugging
-        QuadTree QT(img, threshold, minBlockSize, method);
+        QuadTree QT(img, io.getThreshold(), io.getMinBlockSize(), io.getMethod());
         cout << "Kompresi selesai." << endl; // debugging
         
         Image compressed(img.getWidth(), img.getHeight());
