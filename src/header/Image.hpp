@@ -25,11 +25,11 @@ public:
     Image(int w, int h);
     ~Image();
 
-    bool load(const string& path);
     // Melakukan Pemuatan Gambar
+    bool load(const string& path);
 
-    bool save(const string& path) const;
     // Melakukan Penyimpanan Gambar
+    bool save(const string& path) const;
 
     void free();
 

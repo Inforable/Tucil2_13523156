@@ -17,8 +17,10 @@ private:
 public:
     InputHandler();
 
+    // Handle Jika Hanya Ingin Input dalam Satu Baris
     void InputSingleLine();
 
+    // Handle Jika Ingin Input Satu per Satu
     void InputOnebyOne();
 
     string getInputPath() const;

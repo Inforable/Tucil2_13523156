@@ -10,10 +10,15 @@ private:
     QuadNode* root;
     int width, height;
 public:
+    // Ctor
     QuadTree(const Image& image, float threshold, int minBlockSize, int method);
+
+    // Dtor
     ~QuadTree();
 
+    // Mengisi gambar dengan warna rata-rata
     void fill(Image& output) const;
+    
     int getDepth() const;
     int countNodes() const;
 };
