@@ -14,6 +14,9 @@ linux:
 
 build: linux
 
+install:
+	sudo apt-get install libfreeimage3 libfreeimageplus3 libfreeimage-dev mingw-w64
+
 clean:
 	rm -f $(BIN)/$(LINUX)
 
