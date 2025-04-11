@@ -49,7 +49,7 @@ float QuadNode::computeError(const Image& image, int method) {
 void QuadNode::build(const Image& image, float threshold, int minBlockSize, int method) {
     float error = computeError(image, method);
 
-    bool checkError = (method == 4) ? (error > threshold) : (error < threshold);
+    bool checkError = error < threshold;
     bool checkSize = (width <= minBlockSize || height <= minBlockSize);
 
     if (checkError || checkSize) {
@@ -59,13 +59,13 @@ void QuadNode::build(const Image& image, float threshold, int minBlockSize, int 
     }
 
     isLeaf = false;
-    int halfW = width / 2;
-    int halfH = height / 2;
+    int halfWidth = width / 2;
+    int halfHeight = height / 2;
 
-    children[0] = new QuadNode(x, y, halfW, halfH);
-    children[1] = new QuadNode(x + halfW, y, width - halfW, halfH);
-    children[2] = new QuadNode(x, y + halfH, halfW, height - halfH);
-    children[3] = new QuadNode(x + halfW, y + halfH, width - halfW, height - halfH);
+    children[0] = new QuadNode(x, y, halfWidth, halfHeight);
+    children[1] = new QuadNode(x + halfWidth, y, width - halfWidth, halfHeight);
+    children[2] = new QuadNode(x, y + halfHeight, halfWidth, height - halfHeight);
+    children[3] = new QuadNode(x + halfWidth, y + halfHeight, width - halfWidth, height - halfHeight);
 
     for (int i = 0; i < 4; ++i) {
         children[i]->build(image, threshold, minBlockSize, method);
