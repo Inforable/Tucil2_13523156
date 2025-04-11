@@ -21,7 +21,7 @@ Program ini merupakan implementasi algoritma Divide and Conquer untuk melakukan 
 
     make install
 
-- **Windows: Depedenci sudah tersedia di src/lib**
+- **Windows: Depedenci sudah tersedia di src/library**
 
 ## Kompilasi
 - **Windows**
