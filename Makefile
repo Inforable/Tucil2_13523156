@@ -15,6 +15,6 @@ linux:
 build: linux
 
 clean:
-	find $(BIN) -type f ! -name 'FreeImage.dll' -delete
+	rm -f $(BIN)/$(LINUX)
 
 all: build
