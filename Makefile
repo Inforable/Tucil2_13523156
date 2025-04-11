@@ -1,5 +1,4 @@
 CXX = g++
-MINGW =  x86_64-w64-mingw32
 CXXFLAGS = -std=c++17
 LDFLAGS = -lfreeimage 
 LWINDOWS = -Isrc/header -Lsrc/library
@@ -15,7 +14,7 @@ linux:
 build: linux
 
 install:
-	sudo apt-get install libfreeimage3 libfreeimageplus3 libfreeimage-dev mingw-w64
+	sudo apt-get install libfreeimage3 libfreeimage-dev
 
 clean:
 	rm -f $(BIN)/$(LINUX)
