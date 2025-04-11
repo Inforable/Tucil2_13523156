@@ -17,8 +17,7 @@ Program ini merupakan implementasi algoritma Divide and Conquer untuk melakukan 
     ```bash
     sudo apt install libfreeimage-dev
 
-Atau 
-
+` **Untuk Linux, bisa juga menggunakan** 
     ```bash
     make install
 
